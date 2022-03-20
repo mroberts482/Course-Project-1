@@ -1,0 +1,14 @@
+#Read data for plot number 2
+data2 <- read.table("household_power_consumption.txt", sep = ";", header = TRUE, stringsAsFactors = FALSE)
+# Set date format
+data2[,"Date"] <- as.Date(data2[,"Date"],format = "%d/%m/%Y")
+# Filter data
+s2data<-subset(data2,Date == "2007-02-01" | Date == "2007-02-02")
+# Date-time format
+datxt <- strptime(paste(sdata$Date,sdata$Time,sep = " "), "%Y-%m-%d %H:%M:%S" )
+# Convert string to numeric format
+GAP2 <-as.numeric(s2data[,"Global_active_power"])
+# Make and save plot
+png("plot2.png",width = 480, height = 480)
+plot(datxt,GAP2,type = "l",xlab = " ",ylab = "Global Active Power (kilowatts)")
+dev.off()
