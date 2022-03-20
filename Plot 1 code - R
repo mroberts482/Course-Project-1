@@ -1,0 +1,13 @@
+# Read data for plot number 1
+data <- read.table("household_power_consumption.txt", sep = ";", header = TRUE, stringsAsFactors = FALSE)library("data.table")
+# Set date format
+data[,"Date"] <- as.Date(data[,"Date"],format = "%d/%m/%Y")
+# Filter data
+s1data<-subset(data,Date == "2007-02-01" | Date == "2007-02-02")
+# Convert string to numeric format
+GAP <-suppressWarnings(as.numeric(sdata[,"Global_active_power"]))
+# The plot
+png("plot1.png",width = 480, height = 480)
+hist(GAP, col = "red", main = "Global Active Power",
+     xlab = "Global Active Power (kilowatts)", ylab = "Frequency")
+dev.off()
