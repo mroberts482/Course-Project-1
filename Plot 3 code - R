@@ -1,0 +1,21 @@
+# Read data for plot number 3
+data3 <- read.table("household_power_consumption.txt", sep = ";", header = TRUE, stringsAsFactors = FALSE)
+# Set date format
+data3[,"Date"] <- as.Date(data3[,"Date"],format = "%d/%m/%Y")
+# Filter data
+s3data<-subset(data3,Date == "2007-02-01" | Date == "2007-02-02")
+# Date-time format
+datxt3 <- strptime(paste(s3data$Date,s3data$Time,sep = " "), "%Y-%m-%d %H:%M:%S" )
+# Convert string to numeric format
+subset1<-as.numeric(s3data[,"Sub_metering_1"])
+subset2<-as.numeric(s3data[,"Sub_metering_2"])
+subset3<-as.numeric(s3data[,"Sub_metering_3"])
+# Make and save plot
+png("plot3.png",width = 480, height = 480)
+plot(datxt3,subset1,col = "black",type = "l", xlab = " ", ylab = "Energy sub metering")
+lines(datxt3, subset2, col = "red")
+lines(datxt3, subset3, col = "blue")
+legend("topright",
+       legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),
+       lty = c(1,1,1), col = c("black","red","blue"))
+dev.off()
